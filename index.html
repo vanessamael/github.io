@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vanessa Mael — Brazilian Portuguese Localization Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: #FDFAF5;
+      color: #1C1C1C;
+      overflow-x: hidden;
+    }
+
+    /* ── Colour Tokens (FarmRio-inspired) ── */
+    :root {
+      --cream:      #FDFAF5;
+      --cream-deep: #F5EFE3;
+      --green:      #2D6A4F;
+      --green-light:#52B788;
+      --coral:      #E07A5F;
+      --gold:       #D4A853;
+      --dark:       #1C1C1C;
+      --mid:        #5A5A50;
+      --border:     #D9D0C1;
+    }
+
+    /* ─────────────── NAV ─────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 60px;
+      height: 72px;
+      background: rgba(253, 250, 245, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--green);
+      text-transform: uppercase;
+    }
+    .nav-logo span { color: var(--coral); }
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px; font-weight: 400;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--mid); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta {
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--cream); background: var(--green);
+      padding: 10px 24px; border: none; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--coral); }
+
+    /* ─────────────── HERO ─────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 72px;
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 60px 80px 80px;
+      position: relative;
+    }
+    /* Subtle botanical watermark */
+    .hero-left::before {
+      content: '';
+      position: absolute; bottom: -40px; left: -60px;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(82,183,136,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-tag {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--coral);
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-tag::before {
+      content: ''; display: block;
+      width: 32px; height: 1px; background: var(--coral);
+    }
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 74px; line-height: 1.05;
+      font-weight: 300; color: var(--dark);
+      margin-bottom: 30px;
+    }
+    .hero-headline em {
+      font-style: italic; color: var(--green);
+    }
+    .hero-sub {
+      font-size: 15px; font-weight: 300; line-height: 1.75;
+      color: var(--mid); max-width: 420px;
+      margin-bottom: 48px;
+    }
+    .hero-actions { display: flex; gap: 16px; align-items: center; }
+    .btn-primary {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--cream);
+      background: var(--green); padding: 16px 36px;
+      border: none; cursor: pointer; text-decoration: none;
+      display: inline-block; transition: background 0.25s;
+    }
+    .btn-primary:hover { background: var(--coral); }
+    .btn-ghost {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--green);
+      background: transparent; padding: 16px 28px;
+      border: 1px solid var(--green); cursor: pointer;
+      text-decoration: none; display: inline-block; transition: all 0.25s;
+    }
+    .btn-ghost:hover { background: var(--green); color: var(--cream); }
+
+    /* Stats strip */
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 64px;
+      padding-top: 40px; border-top: 1px solid var(--border);
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px; font-weight: 400; color: var(--green);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 11px; font-weight: 400; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--mid);
+      margin-top: 6px;
+    }
+
+    /* Hero Right — visual panel */
+    .hero-right {
+      position: relative;
+      background: var(--cream-deep);
+      overflow: hidden;
+    }
+    /* Large botanical SVG illustration */
+    .hero-right svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-badge {
+      position: absolute; bottom: 60px; left: -28px;
+      background: var(--coral); color: var(--cream);
+      padding: 28px 32px; width: 190px;
+      box-shadow: 8px 8px 32px rgba(224,122,95,0.3);
+    }
+    .badge-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px; font-weight: 300; line-height: 1;
+      margin-bottom: 6px;
+    }
+    .badge-sub {
+      font-size: 10px; letter-spacing: 0.16em;
+      text-transform: uppercase; opacity: 0.85;
+    }
+
+    /* ─────────────── MARQUEE ─────────────── */
+    .marquee-bar {
+      background: var(--green); color: var(--cream);
+      padding: 16px 0; overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 60px; white-space: nowrap;
+      animation: marquee 30s linear infinite;
+    }
+    .marquee-track span {
+      font-size: 11px; font-weight: 400; letter-spacing: 0.22em;
+      text-transform: uppercase; flex-shrink: 0;
+    }
+    .marquee-track .dot {
+      color: var(--gold); font-size: 14px;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─────────────── SERVICES ─────────────── */
+    .section-pad { padding: 120px 80px; }
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--coral);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::before {
+      content: ''; display: block;
+      width: 32px; height: 1px; background: var(--coral);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px; font-weight: 300; line-height: 1.1;
+      color: var(--dark); max-width: 520px;
+    }
+    .section-title em { font-style: italic; color: var(--green); }
+    .section-body {
+      font-size: 15px; font-weight: 300; line-height: 1.8;
+      color: var(--mid); max-width: 480px; margin-top: 24px;
+    }
+
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 64px;
+    }
+    .service-card {
+      background: var(--cream-deep);
+      padding: 48px 40px; position: relative;
+      overflow: hidden; transition: transform 0.25s;
+      cursor: default;
+    }
+    .service-card:hover { transform: translateY(-4px); }
+    .service-card:hover .service-icon { background: var(--coral); }
+    .service-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 3px; background: var(--green);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-icon {
+      width: 48px; height: 48px;
+      background: var(--green); display: flex; align-items: center;
+      justify-content: center; margin-bottom: 28px;
+      transition: background 0.25s;
+    }
+    .service-icon svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 1.5; }
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 400; line-height: 1.2;
+      color: var(--dark); margin-bottom: 16px;
+    }
+    .service-desc {
+      font-size: 14px; font-weight: 300; line-height: 1.75;
+      color: var(--mid);
+    }
+    .service-num {
+      position: absolute; top: 40px; right: 40px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px; font-weight: 300;
+      color: rgba(45,106,79,0.07); line-height: 1;
+    }
+
+    /* ─────────────── EXPERTISE / ABOUT ─────────────── */
+    .about-section {
+      background: var(--green);
+      padding: 120px 80px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center;
+    }
+    .about-left {}
+    .about-section .section-label { color: var(--gold); }
+    .about-section .section-label::before { background: var(--gold); }
+    .about-section .section-title { color: var(--cream); max-width: 100%; }
+    .about-section .section-title em { color: var(--gold); }
+    .about-section .section-body { color: rgba(253,250,245,0.75); }
+    .about-right {}
+    .exp-list { list-style: none; }
+    .exp-item {
+      padding: 28px 0; border-bottom: 1px solid rgba(253,250,245,0.15);
+      display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start;
+    }
+    .exp-item:first-child { padding-top: 0; }
+    .exp-year {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold); padding-top: 4px;
+    }
+    .exp-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; font-weight: 400; color: var(--cream);
+      line-height: 1.3; margin-bottom: 6px;
+    }
+    .exp-company {
+      font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(253,250,245,0.6);
+    }
+
+    /* ─────────────── SKILLS STRIP ─────────────── */
+    .skills-section {
+      padding: 80px; background: var(--cream-deep);
+    }
+    .skills-grid {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px;
+    }
+    .skill-tag {
+      font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 10px 20px; border: 1px solid var(--border);
+      color: var(--mid); background: var(--cream);
+      transition: all 0.2s;
+    }
+    .skill-tag:hover, .skill-tag.featured {
+      background: var(--green); color: var(--cream); border-color: var(--green);
+    }
+    .skills-intro {
+      display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: end;
+    }
+
+    /* ─────────────── PROCESS ─────────────── */
+    .process-section { padding: 120px 80px; }
+    .process-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px; margin-top: 64px;
+    }
+    .process-step {
+      padding: 40px 36px; background: var(--cream-deep);
+      position: relative;
+    }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px; font-weight: 300;
+      color: var(--border); line-height: 1;
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 400;
+      color: var(--dark); margin-bottom: 12px;
+    }
+    .step-desc {
+      font-size: 13px; font-weight: 300; line-height: 1.75; color: var(--mid);
+    }
+    .step-connector {
+      position: absolute; top: 56px; right: -1px;
+      width: 22px; height: 2px; background: var(--coral);
+      z-index: 1;
+    }
+    .process-step:last-child .step-connector { display: none; }
+
+    /* ─────────────── CLIENTS / BRANDS ─────────────── */
+    .clients-section {
+      padding: 80px; border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .clients-label {
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--mid); text-align: center; margin-bottom: 48px;
+    }
+    .clients-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 64px; flex-wrap: wrap;
+    }
+    .client-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 300;
+      color: var(--border); letter-spacing: 0.04em;
+      transition: color 0.2s; cursor: default;
+    }
+    .client-name:hover { color: var(--green); }
+
+    /* ─────────────── TESTIMONIAL ─────────────── */
+    .quote-section {
+      padding: 120px 80px; background: var(--cream-deep);
+      text-align: center;
+    }
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px; line-height: 0.5; color: var(--coral);
+      opacity: 0.3; display: block; margin-bottom: 32px;
+    }
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 300; font-style: italic;
+      line-height: 1.5; color: var(--dark);
+      max-width: 780px; margin: 0 auto 40px;
+    }
+    .quote-author {
+      font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--mid);
+    }
+    .quote-author span { color: var(--green); }
+
+    /* ─────────────── CTA ─────────────── */
+    .cta-section {
+      padding: 140px 80px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+      background: var(--dark);
+      position: relative; overflow: hidden;
+    }
+    /* Decorative botanical circle */
+    .cta-section::before {
+      content: '';
+      position: absolute; right: -100px; top: -100px;
+      width: 480px; height: 480px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .cta-section::after {
+      content: '';
+      position: absolute; right: 40px; top: -40px;
+      width: 300px; height: 300px;
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .cta-left .section-label { color: var(--gold); }
+    .cta-left .section-label::before { background: var(--gold); }
+    .cta-left .section-title { color: var(--cream); font-size: 64px; max-width: 100%; }
+    .cta-left .section-title em { color: var(--coral); }
+    .cta-right {}
+    .cta-body {
+      font-size: 15px; font-weight: 300; line-height: 1.8;
+      color: rgba(253,250,245,0.65); margin-bottom: 40px;
+    }
+    .cta-email {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; color: var(--gold); font-weight: 300;
+      display: block; margin-bottom: 36px;
+      text-decoration: none;
+    }
+    .cta-buttons { display: flex; gap: 16px; }
+
+    /* ─────────────── FOOTER ─────────────── */
+    footer {
+      background: #111; color: rgba(253,250,245,0.5);
+      padding: 48px 80px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(253,250,245,0.8);
+    }
+    .footer-logo span { color: var(--coral); }
+    .footer-copy { font-size: 12px; letter-spacing: 0.08em; }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a {
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(253,250,245,0.45); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cream); }
+  </style>
+</head>
+<body>
+
+  <!-- ─────── NAV ─────── -->
+  <nav>
+    <div class="nav-logo">VM<span>·</span>Localization</div>
+    <ul class="nav-links">
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Expertise</a></li>
+      <li><a href="#">Process</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <button class="nav-cta">Let's Work Together</button>
+  </nav>
+
+  <!-- ─────── HERO ─────── -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-tag">Brazilian Portuguese Specialist</p>
+      <h1 class="hero-headline">
+        Words<br/>
+        that <em>belong</em><br/>
+        in Brazil.
+      </h1>
+      <p class="hero-sub">
+        Senior localization professional with 20+ years ensuring that software,
+        marketing, and media speak to Brazilian audiences — authentically,
+        precisely, and naturally.
+      </p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">View Services</a>
+        <a href="#" class="btn-ghost">Get in Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Years of expertise</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Industry verticals</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">PT-BR focused</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorative panel with botanical SVG -->
+    <div class="hero-right">
+      <svg viewBox="0 0 600 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <!-- Background wash -->
+        <rect width="600" height="900" fill="#F5EFE3"/>
+        <!-- Tropical leaf clusters -->
+        <!-- Large palm leaf top-right -->
+        <g transform="translate(480,80) rotate(20)">
+          <ellipse rx="12" ry="120" fill="#2D6A4F" opacity="0.18"/>
+          <ellipse rx="10" ry="100" fill="#2D6A4F" opacity="0.22" transform="rotate(-25) translate(20,-20)"/>
+          <ellipse rx="9" ry="90" fill="#52B788" opacity="0.15" transform="rotate(30) translate(-30,10)"/>
+          <ellipse rx="8" ry="80" fill="#2D6A4F" opacity="0.20" transform="rotate(-50) translate(10,30)"/>
+        </g>
+        <!-- Medium leaf cluster mid-left -->
+        <g transform="translate(60,400) rotate(-15)">
+          <ellipse rx="10" ry="100" fill="#2D6A4F" opacity="0.14"/>
+          <ellipse rx="9" ry="85" fill="#52B788" opacity="0.12" transform="rotate(35) translate(-15,10)"/>
+          <ellipse rx="8" ry="70" fill="#2D6A4F" opacity="0.16" transform="rotate(-40) translate(20,-10)"/>
+        </g>
+        <!-- Bottom botanical -->
+        <g transform="translate(300,820) rotate(0)">
+          <ellipse rx="14" ry="130" fill="#2D6A4F" opacity="0.15"/>
+          <ellipse rx="11" ry="110" fill="#52B788" opacity="0.12" transform="rotate(-30) translate(-25,-10)"/>
+          <ellipse rx="10" ry="95" fill="#2D6A4F" opacity="0.18" transform="rotate(40) translate(30,0)"/>
+          <ellipse rx="9" ry="80" fill="#40916C" opacity="0.14" transform="rotate(-60) translate(-10,15)"/>
+        </g>
+        <!-- Hibiscus bloom — abstract circles -->
+        <g transform="translate(180,220)">
+          <circle r="48" fill="#E07A5F" opacity="0.22"/>
+          <circle r="30" fill="#D4A853" opacity="0.28"/>
+          <circle r="12" fill="#E07A5F" opacity="0.40"/>
+          <!-- petals -->
+          <ellipse rx="18" ry="46" fill="#E07A5F" opacity="0.15" transform="rotate(0)"/>
+          <ellipse rx="18" ry="46" fill="#E07A5F" opacity="0.15" transform="rotate(60)"/>
+          <ellipse rx="18" ry="46" fill="#E07A5F" opacity="0.15" transform="rotate(120)"/>
+        </g>
+        <!-- Second bloom -->
+        <g transform="translate(440,560)">
+          <circle r="38" fill="#D4A853" opacity="0.18"/>
+          <circle r="22" fill="#E07A5F" opacity="0.22"/>
+          <circle r="9" fill="#D4A853" opacity="0.40"/>
+        </g>
+        <!-- Fine line illustration — palm frond -->
+        <g stroke="#2D6A4F" stroke-width="1" fill="none" opacity="0.25" transform="translate(320,100)">
+          <line x1="0" y1="0" x2="0" y2="200"/>
+          <path d="M0,40 Q-60,20 -80,-10"/>
+          <path d="M0,40 Q60,20 80,-10"/>
+          <path d="M0,80 Q-70,50 -100,20"/>
+          <path d="M0,80 Q70,50 100,20"/>
+          <path d="M0,120 Q-65,90 -90,60"/>
+          <path d="M0,120 Q65,90 90,60"/>
+          <path d="M0,160 Q-55,140 -75,110"/>
+          <path d="M0,160 Q55,140 75,110"/>
+        </g>
+        <!-- Horizontal rule / divider lines -->
+        <line x1="80" y1="680" x2="520" y2="680" stroke="#D9D0C1" stroke-width="0.5"/>
+        <line x1="80" y1="700" x2="320" y2="700" stroke="#D9D0C1" stroke-width="0.5"/>
+        <!-- Name watermark -->
+        <text x="300" y="500" text-anchor="middle"
+          font-family="'Cormorant Garamond', serif"
+          font-size="88" font-weight="300" fill="#2D6A4F"
+          opacity="0.08" letter-spacing="4">VM</text>
+      </svg>
+
+      <div class="hero-badge">
+        <div class="badge-title">PT-BR<br/>Expert</div>
+        <div class="badge-sub">Since 2002</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────── MARQUEE ─────── -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span>Localization QA</span>
+      <span class="dot">✦</span>
+      <span>Software Testing</span>
+      <span class="dot">✦</span>
+      <span>Copy Editing</span>
+      <span class="dot">✦</span>
+      <span>Marketing Localization</span>
+      <span class="dot">✦</span>
+      <span>Software UI Review</span>
+      <span class="dot">✦</span>
+      <span>Brazilian Portuguese</span>
+      <span class="dot">✦</span>
+      <span>Linguistic QA</span>
+      <span class="dot">✦</span>
+      <span>Localization QA</span>
+      <span class="dot">✦</span>
+      <span>Software Testing</span>
+      <span class="dot">✦</span>
+      <span>Copy Editing</span>
+      <span class="dot">✦</span>
+      <span>Marketing Localization</span>
+      <span class="dot">✦</span>
+      <span>Software UI Review</span>
+      <span class="dot">✦</span>
+      <span>Brazilian Portuguese</span>
+      <span class="dot">✦</span>
+      <span>Linguistic QA</span>
+      <span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ─────── SERVICES ─────── -->
+  <section class="section-pad">
+    <div style="max-width:1280px;margin:0 auto;">
+      <p class="section-label">What I Offer</p>
+      <h2 class="section-title">Services tailored for <em>Brazilian</em> audiences.</h2>
+      <p class="section-body">
+        From in-app copy to marketing campaigns — every word is reviewed by a native
+        PT-BR expert with deep experience across technology, streaming, and software.
+      </p>
+
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          </div>
+          <div class="service-name">Localization QA</div>
+          <p class="service-desc">Thorough review of localized content for linguistic accuracy, cultural fit, consistency, and tone — ensuring your PT-BR release is flawless before it reaches users.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="service-name">Software UI Testing</div>
+          <p class="service-desc">Functional and linguistic testing of software interfaces in Brazilian Portuguese — catching text expansion issues, broken strings, and mistranslations before launch.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <div class="service-name">Copy Editing</div>
+          <p class="service-desc">Expert proofreading and editing of Portuguese copy — from website content to product descriptions, ensuring natural, compelling, and grammatically precise language.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">04</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="service-name">Marketing Localization</div>
+          <p class="service-desc">Culturally adapted marketing materials that resonate with the Brazilian market — from campaign slogans and email sequences to social content and product storytelling.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">05</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="service-name">Loc Manager Consulting</div>
+          <p class="service-desc">Strategic advisory for companies building or improving their PT-BR localization workflows — from vendor selection to style guide creation and team training.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">06</div>
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="service-name">Media &amp; Streaming QA</div>
+          <p class="service-desc">Subtitle and audio description review for streaming platforms — ensuring timing, readability, and cultural accuracy of PT-BR media content at scale.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────── EXPERIENCE / ABOUT ─────── -->
+  <section class="about-section">
+    <div class="about-left">
+      <p class="section-label">About</p>
+      <h2 class="section-title" style="font-size:52px;">Two decades shaping <em>Brazil's</em> digital voice.</h2>
+      <p class="section-body" style="max-width:100%;">
+        Vanessa Mael is a Senior Localization Manager with over two decades of experience in
+        Brazilian Portuguese language services. Since relocating to the US in 2002, her career
+        has spanned the world's leading tech, media, and entertainment platforms — always with
+        one focus: making sure Brazilian users feel understood, at home, and delighted.
+      </p>
+      <div style="margin-top:48px;">
+        <a href="#" class="btn-primary" style="background:var(--coral);">Download CV</a>
+      </div>
+    </div>
+    <div class="about-right">
+      <ul class="exp-list">
+        <li class="exp-item">
+          <span class="exp-year">2020–Present</span>
+          <div>
+            <div class="exp-title">Manager, Localization QA</div>
+            <div class="exp-company">Airbnb</div>
+          </div>
+        </li>
+        <li class="exp-item">
+          <span class="exp-year">2018–2020</span>
+          <div>
+            <div class="exp-title">Sr. QA &amp; QC Specialist — Latin America</div>
+            <div class="exp-company">HBO Max / WarnerMedia</div>
+          </div>
+        </li>
+        <li class="exp-item">
+          <span class="exp-year">2016–2018</span>
+          <div>
+            <div class="exp-title">Marketing Localization Specialist — PT-BR</div>
+            <div class="exp-company">Alteryx</div>
+          </div>
+        </li>
+        <li class="exp-item">
+          <span class="exp-year">2013–2016</span>
+          <div>
+            <div class="exp-title">Linguistic Software Tester — PT-BR</div>
+            <div class="exp-company">RWS Group</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─────── SKILLS ─────── -->
+  <section class="skills-section">
+    <div style="max-width:1280px;margin:0 auto;">
+      <div class="skills-intro">
+        <div>
+          <p class="section-label">Specialisms</p>
+          <h2 class="section-title" style="font-size:48px;">Deep expertise, <em>broad</em> reach.</h2>
+        </div>
+        <p class="section-body" style="margin-top:0;">
+          A versatile command of Brazilian Portuguese across registers — from B2C
+          marketing warmth to software microcopy precision — enables me to serve
+          any industry vertical.
+        </p>
+      </div>
+      <div class="skills-grid">
+        <span class="skill-tag featured">Brazilian Portuguese (PT-BR)</span>
+        <span class="skill-tag featured">Localization QA</span>
+        <span class="skill-tag featured">Software Localization Testing</span>
+        <span class="skill-tag">Linguistic Testing</span>
+        <span class="skill-tag">UI/UX Copy Review</span>
+        <span class="skill-tag">Marketing Copy</span>
+        <span class="skill-tag">Subtitle QA</span>
+        <span class="skill-tag">Style Guide Creation</span>
+        <span class="skill-tag">Glossary Management</span>
+        <span class="skill-tag">CAT Tools (SDL, memoQ)</span>
+        <span class="skill-tag">Culturalization</span>
+        <span class="skill-tag">Streaming &amp; OTT</span>
+        <span class="skill-tag">Tech / SaaS</span>
+        <span class="skill-tag">E-commerce</span>
+        <span class="skill-tag">Gaming Localization</span>
+        <span class="skill-tag">Legal Copy Review</span>
+        <span class="skill-tag">TM / MT Post-editing</span>
+        <span class="skill-tag">Vendor Management</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────── PROCESS ─────── -->
+  <section class="process-section">
+    <div style="max-width:1280px;margin:0 auto;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:32px;">
+        <div>
+          <p class="section-label">How It Works</p>
+          <h2 class="section-title" style="font-size:48px;">A clear, <em>collaborative</em> process.</h2>
+        </div>
+        <p class="section-body" style="margin:0;max-width:360px;">Every project begins with listening. The rest follows a tested workflow built over a decade of enterprise localization work.</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-title">Discovery Brief</div>
+          <p class="step-desc">We align on scope, target audience, tone, and key terminology before any work begins.</p>
+          <div class="step-connector"></div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-title">Linguistic Review</div>
+          <p class="step-desc">Thorough review of all copy and UI strings against brand guidelines, glossaries, and style rules.</p>
+          <div class="step-connector"></div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-title">Cultural QA</div>
+          <p class="step-desc">Checking cultural fit, idiomatic accuracy, and audience appropriateness beyond literal correctness.</p>
+          <div class="step-connector"></div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-title">Delivery &amp; Feedback</div>
+          <p class="step-desc">Annotated reports, corrected files, and an open feedback loop to support your team long-term.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────── CLIENTS ─────── -->
+  <section class="clients-section">
+    <div style="max-width:1280px;margin:0 auto;">
+      <p class="clients-label">Trusted by global brands</p>
+      <div class="clients-row">
+        <span class="client-name">Airbnb</span>
+        <span class="client-name">HBO Max</span>
+        <span class="client-name">WarnerMedia</span>
+        <span class="client-name">Alteryx</span>
+        <span class="client-name">RWS</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────── QUOTE ─────── -->
+  <section class="quote-section">
+    <div style="max-width:900px;margin:0 auto;">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">
+        Localization is not translation — it is the art of making a product feel
+        like it was born in Brazil.
+      </p>
+      <p class="quote-author">Vanessa Mael <span>— Senior Localization Manager</span></p>
+    </div>
+  </section>
+
+  <!-- ─────── CTA ─────── -->
+  <section class="cta-section">
+    <div class="cta-left">
+      <p class="section-label">Let's Collaborate</p>
+      <h2 class="section-title">Ready to speak <em>Brazilian?</em></h2>
+    </div>
+    <div class="cta-right">
+      <p class="cta-body">
+        Whether you need a one-off QA pass, ongoing localization support, or a full
+        PT-BR language strategy — I'm available for contract and consulting engagements.
+        Let's make your product feel native to Brazil.
+      </p>
+      <a href="mailto:vanessa.mael2011@gmail.com" class="cta-email">vanessa.mael2011@gmail.com</a>
+      <div class="cta-buttons">
+        <a href="mailto:vanessa.mael2011@gmail.com" class="btn-primary">Send a Message</a>
+        <a href="https://www.linkedin.com/in/vanessamael/" target="_blank" class="btn-ghost" style="border-color:rgba(253,250,245,0.3);color:rgba(253,250,245,0.7);">LinkedIn Profile</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────── FOOTER ─────── -->
+  <footer>
+    <div class="footer-logo">VM<span>·</span>Localization</div>
+    <p class="footer-copy">© 2025 Vanessa Mael — Brazilian Portuguese Localization Services</p>
+    <div class="footer-links">
+      <a href="#">Services</a>
+      <a href="#">Process</a>
+      <a href="https://www.linkedin.com/in/vanessamael/" target="_blank">LinkedIn</a>
+      <a href="mailto:vanessa.mael2011@gmail.com">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
